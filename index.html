@@ -164,113 +164,68 @@ button:hover,
 }
 </style>
 </head>
-<body>
-  <div class="container">
-    <div class="card" id="formCard">
-      <h1>WB 10th Board Results</h1>
-      <p class="subtitle">Check your Madhyamik 2026 result instantly</p>
-
-      <form id="resultForm">
-        <label>Roll Number</label>
-        <input
-          type="text"
-          name="roll_n"
-          placeholder="Enter Roll Number"
-          oninput="this.value=this.value.toUpperCase()"
-        />
-        <div class="error" id="rollErr"></div>
-
-        <label>Date of Birth</label>
-        <div class="dob-grid">
-          <select name="day">
-            <option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
-          </select>
-
-          <select name="month">
-            <option value="01">Jan (01)</option><option value="02">Feb (02)</option><option value="03">Mar (03)</option><option value="04">Apr (04)</option><option value="05">May (05)</option><option value="06">Jun (06)</option><option value="07">Jul (07)</option><option value="08">Aug (08)</option><option value="09">Sep (09)</option><option value="10">Oct (10)</option><option value="11">Nov (11)</option><option value="12">Dec (12)</option>
-          </select>
-
-          <select name="year">
-            <option value="90">1990</option><option value="91">1991</option><option value="92">1992</option><option value="93">1993</option><option value="94">1994</option><option value="95">1995</option><option value="96">1996</option><option value="97">1997</option><option value="98">1998</option><option value="99">1999</option><option value="00">2000</option><option value="01">2001</option><option value="02">2002</option><option value="03">2003</option><option value="04">2004</option><option value="05">2005</option><option value="06">2006</option><option value="07">2007</option><option value="08">2008</option><option value="09">2009</option><option value="10">2010</option><option value="11">2011</option><option value="12">2012</option><option value="13">2013</option><option value="14">2014</option><option value="15">2015</option><option value="16">2016</option>
-          </select>
-        </div>
-        <div class="error" id="applErr"></div>
-
-        <button type="submit" class="primary-btn">Search Result</button>
-      </form>
-
-      <div class="loader" id="loadingSpinner">Please wait, fetching result...</div>
-    </div>
-
-    <div class="card hidden" id="resultWrapper">
-      <div class="table-wrap" id="resultTable"></div>
-      <button class="secondary-btn" onclick="location.reload()">Check Another Result</button>
-    </div>
-
-    <div class="footer">
-      Made with ❤️ by Vishal | <span class="brand">RAIGANJLOOTERS</span>
-    </div>
-  </div>
-
-  <script>
-    const spinner = document.getElementById('loadingSpinner');
-    const rollErr = document.getElementById('rollErr');
-    const applErr = document.getElementById('applErr');
-
-    async function getApiResponse(url) {
-      try {
-        const response = await fetch(url + '?t=' + Date.now(), {
-          cache: 'no-store'
-        });
-
-        if (!response.ok) {
-          throw new Error('Record not found');
+           rollErr.innerText = 'NOT ENROLLED';
+          setTimeout(function () {location.reload();}, 5000);
         }
 
-        return await response.json();
-      } catch (e) {
-        rollErr.innerText = 'Record not found or API error.';
-        return null;
+      }
+    });
+
+    function checkAnotherResult() {
+      const pagetype = getUrlParam("pagetype");
+      if (pagetype == "amp") {
+        document.getElementById('resultForm').reset();
+        document.getElementById('resultForm').classList.remove('d-none');
+        document.getElementById('resultWrapper').classList.add('d-none');
+      } else { location.reload();
+        // window.parent.postMessage({
+        //     type: 'reload-page',
+        //   },
+        //   '*'
+        // );
+        // postHeight();
       }
     }
 
-    document.getElementById('resultForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
+    function generateResultTable(result, data) {
+      let personalHtml = '';
+      let subjectsHtml =
+        `<tr><th style="font-size:14px; font-weight:bold;">Subject</th><th style="text-align:center;font-size:14px; font-weight:bold;">Marks/Grades</th></tr>`;
+      const boardName = 'WB Board';
+      const boardClass = '10th';
+      const subjects = ["First_Language", "Second_Language", "Mathematics", "Physical_Science", "Life_Science",
+        "History", "Geography", "Opt_Elec"
+      ];
 
-      rollErr.innerText = '';
-      applErr.innerText = '';
-      spinner.style.display = 'block';
+      personalHtml = `<tr><td width="40%">Roll Number</td><td>${result.Roll_No}</td></tr><tr><td width="40%">STUDENT'S NAME</td><td>${result.Name}</td></tr>`;
+      subjects.forEach(subject => {
+        // if (result[`${subject}_Marks`] && result[`${subject}_Marks`] > 0) {
+        const marks = result[`${subject}_Marks`].trim();
+        const grade = result[`${subject}_Grade`].trim();
+        subjectsHtml += `<tr>
+            <td width="40%">${subject.split("_").join(" ")} Marks</td>
+            <td style="text-align:center;">${marks}</td>
+          </tr>
+          <tr>
+            <td width="40%">${subject.split("_").join(" ")} Grade</td>
+            <td style="text-align:center;">${grade}</td>
+          </tr>`;
+        // }
+      });
 
-      const formData = new FormData(this);
-      const roll = (formData.get('roll_n') || '').trim().toUpperCase();
-      const date = `${formData.get('day')}${formData.get('month')}${formData.get('year')}`;
+      remarksHtml = `
+      <tr><td width="40%" style="text-align:right">Aggregate</td><td style="font-size:16px;font-weight:bold;">${result.Aggregate}</td></tr>
+      <tr><td width="40%" style="text-align:right">Overall Grade</td><td style="font-size:16px;font-weight:bold;">${result.Overall_Grade}</td></tr>
+      <tr><td width="40%" style="text-align:right">Remarks</td><td style="font-size:16px;font-weight:bold;">${result.Remarks}</td></tr>
+      `;
 
-      if (!roll) {
-        spinner.style.display = 'none';
-        rollErr.innerText = 'Roll Number is required.';
-        return;
-      }
-
-      const url = `https://boardresultapi.abplive.com/wb/2026/10/${roll}/${date}`;
-      const result = await getApiResponse(url);
-      spinner.style.display = 'none';
-
-      if (result) {
-        document.getElementById('formCard').classList.add('hidden');
-        document.getElementById('resultWrapper').classList.remove('hidden');
-
-        document.getElementById('resultTable').innerHTML = `
-          <table>
-            <tr><th colspan="2">WB Board 10th Result</th></tr>
-            <tr><td>Roll Number</td><td>${result.Roll_No || '-'}</td></tr>
-            <tr><td>Student Name</td><td>${result.Name || '-'}</td></tr>
-            <tr><td>Aggregate</td><td>${result.Aggregate || '-'}</td></tr>
-            <tr><td>Overall Grade</td><td>${result.Overall_Grade || '-'}</td></tr>
-            <tr><td>Remarks</td><td>${result.Remarks || '-'}</td></tr>
-          </table>
-        `;
-      }
-    });
+      const resultTableHtml =
+        `<table class="table" width="100%" border="1" id="marksheet"><thead><tr><th colspan="6"><span class="result-title" style="font-size:16px;">${boardName} ${boardClass} Result</span><button class="" id="printResult" onclick="window.print();">Print</button></th></tr>${personalHtml}</thead><tbody>${subjectsHtml}${remarksHtml}<tfoot><tr><td colspan="5"><small class="disclaimer"><strong>Disclaimer: </strong>"Provisional results of Madhyamik Pariksha, 2026 have been published by WBBSE with a view to providing immediate information to the examinees. These cannot be treated as original mark sheets. West Bengal Board of Secondary Education is not responsible for any inadvertent error that might have crept in the results of Madhyamik Pariksha, 2026 being published through this Website."</small></td></tr></tfoot></table>`;
+      document.getElementById('resultWrapper').classList.remove('d-none');
+      document.getElementById('resultTable').innerHTML = resultTableHtml;
+      postHeight();
+    }
   </script>
 </body>
+     
 </html>
