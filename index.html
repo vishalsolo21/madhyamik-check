@@ -14,8 +14,10 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdn.abplive.com/exam-results/hindi/css/desktop/styles-election-2020.css?v=1.01" />
     <link rel="stylesheet" type="text/css" href="https://cdn.abplive.com/board-results-iframe-2020/css/register-board-results-form.css" />
+  
+
   <style>
-    .rs-loader {position: fixed; left: 0; top: 0;  width: 100%; height: 100%; z-index: 10; background: rgba(0,0,0,1); color: #fff; display: flex; align-items: center; flex-direction: column; font-size: 16px; padding: 30px 0; overflow: auto;}
+.rs-loader {position: fixed; left: 0; top: 0;  width: 100%; height: 100%; z-index: 10; background: rgba(0,0,0,1); color: #fff; display: flex; align-items: center; flex-direction: column; font-size: 16px; padding: 30px 0; overflow: auto;}
     .rs-loader p span {width: 1.25em; display: inline-block;}
     .rs-loader p span:after {overflow: hidden;display: inline-block;vertical-align: bottom;-webkit-animation: ellipsis steps(4,end) 900ms infinite; animation: ellipsis steps(4,end) 900ms infinite;content: "\2026"; width: 0px;}
 
@@ -30,9 +32,7 @@
         width: 1.25em;    
       }
     }
-  </style>
-
-  <style>
+    
 * {
   margin: 0;
   padding: 0;
@@ -186,7 +186,7 @@ button:hover,
 </head>
 <body>
   <form class="board-reg-form board-result-form mp-result-form" action="/" id="resultForm">
-    <h4 class="h4 text-center">WBBSE 10th Results</h4>
+    <h4 class="h4 text-center">WBBSE 10TH RESULTS</h4>
     <hr class="hr" />
     <div class="board-search-form-wrapper">
       <div class="board-search-form row">
@@ -199,7 +199,7 @@ button:hover,
           <div class="row">
             <div class="col-12 d-flex">
               <select class="flex-grow-1" name="day">
-                <option value="01" selected>01</option>
+                <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
                 <option value="04">04</option>
@@ -219,7 +219,7 @@ button:hover,
                 <option value="18">18</option>
                 <option value="19">19</option>
                 <option value="20">20</option>
-                <option value="21">21</option>
+                <option value="21" selected>21</option>
                 <option value="22">22</option>
                 <option value="23">23</option>
                 <option value="24">24</option>
@@ -232,10 +232,10 @@ button:hover,
                 <option value="31">31</option>
               </select>
               <select class="flex-grow-1" name="month">
-                <option value="01" selected>Jan (01)</option>
+                <option value="01">Jan (01)</option>
                 <option value="02">Feb (02)</option>
                 <option value="03">Mar (03)</option>
-                <option value="04">Apr (04)</option>
+                <option value="04" selected>Apr (04)</option>
                 <option value="05">May (05)</option>
                 <option value="06">Jun (06)</option>
                 <option value="07">Jul (07)</option>
@@ -258,11 +258,11 @@ button:hover,
                 <option value="99">1999</option>
                 <option value="00">2000</option>
                 <option value="01">2001</option>
-                <option value="02">2002</option>
+                <option value="02" selected>2002</option>
                 <option value="03">2003</option>
                 <option value="04">2004</option>
                 <option value="05">2005</option>
-                <option value="06" selected>2006</option>
+                <option value="06">2006</option>
                 <option value="07">2007</option>
                 <option value="08">2008</option>
                 <option value="09">2009</option>
@@ -278,9 +278,8 @@ button:hover,
           </div>
         </div>
         <button class="btn btn-primary d-inline-flex align-items-center" type="submit">
-          <!-- <span class="spinner-border spinner-border-sm mr-2 d-none" id="loadingSpinner" role="status"
-            aria-hidden="true"></span> -->
-          Search
+          
+          Check Result
         </button>
       </div>
       <div class="error" id="rollErr"></div>
@@ -298,8 +297,7 @@ button:hover,
       </script>
   </div>
   <div class="result-wrapper pb-3 d-none" id="resultWrapper">
-    <!-- <h1 class="board-title">BOARD OF SECONDARY EDUCATION MADHYA PRADESH, BHOPAL</h1>
-    <h2 class="board-subtitle">HIGH SCHOOL CERTIFICATE EXAMINATION (HSC)-10th CLASS RESULT-2020</h2> -->
+  
     <div class="result-table" id="resultTable"></div>
     <button class="btn btn-primary d-block mx-auto" onclick="checkAnotherResult()">
       Check Another Result
@@ -399,19 +397,17 @@ button:hover,
         spinner.parentElement.removeAttribute('disabled');
         return false;
       } else {
-        //url = `https://snno51kbvd.execute-api.ap-south-1.amazonaws.com/Staging/getdata/${roll_n}/${date}`;
+      
         url = `https://boardresultapi.abplive.com/wb/2026/10/${roll_n}/${date}`;
 
         const results = await getApiResponse(url);
-        // spinner.classList.add('d-none');
-        // spinner.parentElement.classList.remove('disabled');
-        // spinner.parentElement.removeAttribute('disabled');
+        
         if (typeof results!== 'undefined' && results!='') {
           document.getElementById('resultForm').classList.add('d-none');
           generateResultTable(results, data);
         } else {
-          //data_res.Count = 'NOT ENROLLED';
-          rollErr.innerText = 'NOT ENROLLED';
+          
+          rollErr.innerText = 'NOT PUBLISHED YET';
           setTimeout(function () {location.reload();}, 5000);
         }
 
