@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WB 10th Board Results | ABPLive</title>
+
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.abplive.com/exam-results/hindi/css/desktop/styles-election-2020.css?v=1.01" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.abplive.com/board-results-iframe-2020/css/register-board-results-form.css" />
+  <style>
+    .rs-loader {position: fixed; left: 0; top: 0;  width: 100%; height: 100%; z-index: 10; background: rgba(0,0,0,1); color: #fff; display: flex; align-items: center; flex-direction: column; font-size: 16px; padding: 30px 0; overflow: auto;}
+    .rs-loader p span {width: 1.25em; display: inline-block;}
+    .rs-loader p span:after {overflow: hidden;display: inline-block;vertical-align: bottom;-webkit-animation: ellipsis steps(4,end) 900ms infinite; animation: ellipsis steps(4,end) 900ms infinite;content: "\2026"; width: 0px;}
+
+    @keyframes ellipsis {
+      to {
+        width: 1.25em; 
+      }
+    }
+
+    @-webkit-keyframes ellipsis {
+      to {
+        width: 1.25em;    
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+  <form class="board-reg-form board-result-form mp-result-form" action="/" id="resultForm">
+    <h4 class="h4 text-center">WBBSE 10th Results</h4>
+    <hr class="hr" />
+    <div class="board-search-form-wrapper">
+      <div class="board-search-form row">
+        <div class="col-12 p-0">
+          <label>Roll Number</label>
+          <input class="w-100" type="text" placeholder="" oninput="this.value = this.value.toUpperCase()" name="roll_n" />
+        </div>
+        <div class="col-12 p-0 mb-3">
+          <label>Date of Birth</label>
+          <div class="row">
+            <div class="col-12 d-flex">
+              <select class="flex-grow-1" name="day">
+                <option value="01" selected>01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+              </select>
+              <select class="flex-grow-1" name="month">
+                <option value="01" selected>Jan (01)</option>
+                <option value="02">Feb (02)</option>
+                <option value="03">Mar (03)</option>
+                <option value="04">Apr (04)</option>
+                <option value="05">May (05)</option>
+                <option value="06">Jun (06)</option>
+                <option value="07">Jul (07)</option>
+                <option value="08">Aug (08)</option>
+                <option value="09">Sep (09)</option>
+                <option value="10">Oct (10)</option>
+                <option value="11">Nov (11)</option>
+                <option value="12">Dec (12)</option>
+              </select>
+              <select class="flex-grow-1" name="year">
+                <option value="90">1990</option>
+                <option value="91">1991</option>
+                <option value="92">1992</option>
+                <option value="93">1993</option>
+                <option value="94">1994</option>
+                <option value="95">1995</option>
+                <option value="96">1996</option>
+                <option value="97">1997</option>
+                <option value="98">1998</option>
+                <option value="99">1999</option>
+                <option value="00">2000</option>
+                <option value="01">2001</option>
+                <option value="02">2002</option>
+                <option value="03">2003</option>
+                <option value="04">2004</option>
+                <option value="05">2005</option>
+                <option value="06" selected>2006</option>
+                <option value="07">2007</option>
+                <option value="08">2008</option>
+                <option value="09">2009</option>
+                <option value="10">2010</option>
+                <option value="11">2011</option>
+                <option value="12">2012</option>
+                <option value="13">2013</option>
+                <option value="14">2014</option>
+                <option value="15">2015</option>
+                <option value="16">2016</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary d-inline-flex align-items-center" type="submit">
+          <!-- <span class="spinner-border spinner-border-sm mr-2 d-none" id="loadingSpinner" role="status"
+            aria-hidden="true"></span> -->
+          Search
+        </button>
+      </div>
+      <div class="error" id="rollErr"></div>
+      <div class="error" id="applErr"></div>
+    </div>
+  </form>
+  <div class="rs-loader d-none" id="loadingSpinner" role="status" aria-hidden="true">
+    <p>Please wait for a moment<span></span></p>
+      <!-- Micro_320 -->
+      <ins class="adsbygoogle"
+          style="display:inline-block;width:320px;height:480px"
+          data-ad-client="ca-pub-5911649231522435"
+          data-ad-slot="4617958085"></ins>
+      <script>
+      </script>
+  </div>
+  <div class="result-wrapper pb-3 d-none" id="resultWrapper">
+    <!-- <h1 class="board-title">BOARD OF SECONDARY EDUCATION MADHYA PRADESH, BHOPAL</h1>
+    <h2 class="board-subtitle">HIGH SCHOOL CERTIFICATE EXAMINATION (HSC)-10th CLASS RESULT-2020</h2> -->
+    <div class="result-table" id="resultTable"></div>
+    <button class="btn btn-primary d-block mx-auto" onclick="checkAnotherResult()">
+      Check Another Result
+    </button>
+  </div>
+  <script>
+    var getUrlParam = (param) => {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      return urlParams.get(param);
+    };
+    var postHeight = function () {
+      let bodyHeight = document.body.scrollHeight;
+      if (bodyHeight > 200) {
+        window.parent.postMessage({
+            iframeId: 'boardResultFormWB',
+            type: 'resize-iframe',
+            height: bodyHeight,
+          },
+          '*'
+        );
+      }
+    };
+    window.onload = function () {
+      postHeight();
+      const boardName = getUrlParam('board');
+      const boardClass = getUrlParam('class');
+      // document.getElementById('boardName').innerText = boardName;
+      // document.getElementById('boardClass').innerText = boardClass;
+    };
+  </script>
+  <script>
+    var spinner = document.getElementById('loadingSpinner');
+    var rollErr = document.getElementById('rollErr');
+    var applErr = document.getElementById('applErr');
+    const getApiResponse = async (endPoint) => {
+      try {
+        const response = await fetch(endPoint, { cache: "default" });
+
+        setTimeout(function () {
+          
+          spinner.classList.add('d-none');
+          spinner.parentElement.classList.remove('disabled');
+          spinner.parentElement.removeAttribute('disabled');
+        }, 3000);
+        if (response.status !== 200) {
+          if(response.status == 404) {
+            spinner.classList.add('d-none');
+            spinner.parentElement.classList.remove('disabled');
+            spinner.parentElement.removeAttribute('disabled');
+            rollErr.innerText = 'Record Not found! Please Retry.';
+            throw new Error(`Page Not found! Status Code: ${response.status}`);
+            setTimeout(function () {location.reload();}, 5000);
+          }
+        }          
+        const result = await response.json();
+        return result;
+      } catch (error) {
+        console.log(error);
+        setTimeout(function () {spinner.classList.add('d-none')}, 3000);
+        spinner.parentElement.classList.remove('disabled');
+        spinner.parentElement.removeAttribute('disabled');
+        rollErr.innerText = 'Error! Please Retry.';
+      }
+    };
+
+    document.getElementById('resultForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      spinner.classList.remove('d-none');
+      spinner.parentElement.classList.add('disabled');
+      spinner.parentElement.setAttribute('disabled', 'disabled');
+      const formData = new FormData(e.target);
+      let data = Array.from(formData.entries()).reduce(
+        (memo, pair) => ({
+          ...memo,
+          [pair[0]]: pair[1],
+        }), {}
+      );
+      data.roll_n = data.roll_n.toUpperCase().trim();
+      var errors = 0;
+      rollErr.innerHTML = '';
+      applErr.innerHTML = '';
+      const roll_n = data.roll_n;
+      if (roll_n == '') {
+        rollErr.innerText = 'Reg. Number is mandatory.';
+        errors = 1;
+      }
+      const date = `${data.day}${data.month}${data.year}`;
+      if (date == '') {
+        applErr.innerText = 'Date of birth is mandatory.';
+        errors = 1;
+      }
+      if (errors == 1) {
+        spinner.classList.add('d-none');
+        spinner.parentElement.classList.remove('disabled');
+        spinner.parentElement.removeAttribute('disabled');
+        return false;
+      } else {
+        //url = `https://snno51kbvd.execute-api.ap-south-1.amazonaws.com/Staging/getdata/${roll_n}/${date}`;
+        url = `https://boardresultapi.abplive.com/wb/2026/10/${roll_n}/${date}`;
+
+        const results = await getApiResponse(url);
+        // spinner.classList.add('d-none');
+        // spinner.parentElement.classList.remove('disabled');
+        // spinner.parentElement.removeAttribute('disabled');
+        if (typeof results!== 'undefined' && results!='') {
+          document.getElementById('resultForm').classList.add('d-none');
+          generateResultTable(results, data);
+        } else {
+          //data_res.Count = 'NOT ENROLLED';
+          rollErr.innerText = 'NOT ENROLLED';
+          setTimeout(function () {location.reload();}, 5000);
+        }
+
+      }
+    });
+
+    function checkAnotherResult() {
+      const pagetype = getUrlParam("pagetype");
+      if (pagetype == "amp") {
+        document.getElementById('resultForm').reset();
+        document.getElementById('resultForm').classList.remove('d-none');
+        document.getElementById('resultWrapper').classList.add('d-none');
+      } else { location.reload();
+        // window.parent.postMessage({
+        //     type: 'reload-page',
+        //   },
+        //   '*'
+        // );
+        // postHeight();
+      }
+    }
+
+    function generateResultTable(result, data) {
+      let personalHtml = '';
+      let subjectsHtml =
+        `<tr><th style="font-size:14px; font-weight:bold;">Subject</th><th style="text-align:center;font-size:14px; font-weight:bold;">Marks/Grades</th></tr>`;
+      const boardName = 'WB Board';
+      const boardClass = '10th';
+      const subjects = ["First_Language", "Second_Language", "Mathematics", "Physical_Science", "Life_Science",
+        "History", "Geography", "Opt_Elec"
+      ];
+
+      personalHtml = `<tr><td width="40%">Roll Number</td><td>${result.Roll_No}</td></tr><tr><td width="40%">STUDENT'S NAME</td><td>${result.Name}</td></tr>`;
+      subjects.forEach(subject => {
+        // if (result[`${subject}_Marks`] && result[`${subject}_Marks`] > 0) {
+        const marks = result[`${subject}_Marks`].trim();
+        const grade = result[`${subject}_Grade`].trim();
+        subjectsHtml += `<tr>
+            <td width="40%">${subject.split("_").join(" ")} Marks</td>
+            <td style="text-align:center;">${marks}</td>
+          </tr>
+          <tr>
+            <td width="40%">${subject.split("_").join(" ")} Grade</td>
+            <td style="text-align:center;">${grade}</td>
+          </tr>`;
+        // }
+      });
+
+      remarksHtml = `
+      <tr><td width="40%" style="text-align:right">Aggregate</td><td style="font-size:16px;font-weight:bold;">${result.Aggregate}</td></tr>
+      <tr><td width="40%" style="text-align:right">Overall Grade</td><td style="font-size:16px;font-weight:bold;">${result.Overall_Grade}</td></tr>
+      <tr><td width="40%" style="text-align:right">Remarks</td><td style="font-size:16px;font-weight:bold;">${result.Remarks}</td></tr>
+      `;
+
+      const resultTableHtml =
+        `<table class="table" width="100%" border="1" id="marksheet"><thead><tr><th colspan="6"><span class="result-title" style="font-size:16px;">${boardName} ${boardClass} Result</span><button class="" id="printResult" onclick="window.print();">Print</button></th></tr>${personalHtml}</thead><tbody>${subjectsHtml}${remarksHtml}<tfoot><tr><td colspan="5"><small class="disclaimer"><strong>Disclaimer: </strong>"Provisional results of Madhyamik Pariksha, 2026 have been published by WBBSE with a view to providing immediate information to the examinees. These cannot be treated as original mark sheets. West Bengal Board of Secondary Education is not responsible for any inadvertent error that might have crept in the results of Madhyamik Pariksha, 2026 being published through this Website."</small></td></tr></tfoot></table>`;
+      document.getElementById('resultWrapper').classList.remove('d-none');
+      document.getElementById('resultTable').innerHTML = resultTableHtml;
+      postHeight();
+    }
+  </script>
+</body>
+
+</html>
